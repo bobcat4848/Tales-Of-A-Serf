@@ -1,0 +1,37 @@
+# Scenario Listing
+# 1. {percentage} MONSTER - chance at fighting a monster upon entering region
+ 
+# 2. DIALOUGE: false
+#   NAMEOFCHARACTER:
+#     "What character says"
+#   ANOTHERCHARACTER:
+#      "What anothercharacter says"
+ 
+# 3. SQUARE:
+#   - WEAPONSHOP - allows user to buy/sell from a weapons shop in this region
+#   - POTIONSHOP - allows user to buy/sell from a potion shop in this region
+#   - FOODSHOP - allows user to buy/sell from a food shop in this region
+ 
+# IMAGE: "/images/imagename.png"
+ 
+# Travelling anywhere will reduce hunger
+TheAwakening:
+  STARTLOCATION: "Draenor"
+    SCENARIOS:
+      DIALOUGE: false
+        GameMaster:
+          "You wake up in an unknown city apartment wondering what your next move will be..."
+  LOCATIONS:
+    "The Shifting Forest":
+      SCENARIOS:
+        DIALOUGE: false
+          Jerry:
+            "This is a dangerous place, leave at once!"
+          Berry:
+            "Listen to my brother, he know's what he's talking about."
+    "Tellurium":
+      SCENARIOS:
+        - 5% MONSTER
+        - SQUARE:
+            - WEAPONSHOP
+            - FOODSHOP
