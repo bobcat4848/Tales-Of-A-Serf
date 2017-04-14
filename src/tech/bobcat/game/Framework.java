@@ -26,31 +26,36 @@ public abstract class Framework {
         // Create entire window frame here
        gameFrame = new JFrame();
        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       //gameFrame.setLayout(new BorderLayout());
        gameFrame.setSize(1200, 800);
        gameFrame.setResizable(false);
        gameFrame.setVisible(true);
 
-       gameAreaGBC = new JPanel(new GridBagLayout());
-       gbc = new GridBagConstraints();
-       gbc.ipadx = 500;
-       gbc.ipady = 500;
+       makeInnerRegion();
        
-       gameAreaGBC.setBackground(Color.CYAN);
-       
-       gameAreaINGBC = new JPanel(new BorderLayout());
-       
+       gameAreaGBC.add(gameAreaINGBC, gbc);
        gameFrame.add(gameAreaGBC);
        
        constructJMenuBar();
        constructTextRegion();
-       //constructButtons();
-       constructHealth();
+       constructButtons();
+       //constructHealth();
        
        gameFrame.repaint();
        gameFrame.revalidate();
     }
    
+    public void makeInnerRegion() {
+        gameAreaGBC = new JPanel(new GridBagLayout());
+        gbc = new GridBagConstraints();
+        gbc.ipadx = 1150;
+        gbc.ipady = 700;
+        
+        gameAreaGBC.setBackground(Color.CYAN);
+        
+        gameAreaINGBC = new JPanel(new BorderLayout());
+        gameAreaINGBC.setBackground(Color.BLACK);
+    }
+    
     // Links the string messages to the JButton itself
     private void formButtons(String topLeftText, String topRightText, String bottomLeftText, String bottomRightText) {
         topLeftButton = new JButton(topLeftText);
@@ -77,7 +82,7 @@ public abstract class Framework {
     	textRegion.add(gameArea, BorderLayout.CENTER);
     	textRegion.add(gameInput, BorderLayout.SOUTH);
     	
-    	gameAreaGBC.add(textRegion, gbc);
+    	gameAreaINGBC.add(textRegion, BorderLayout.NORTH);
     }
     
     
@@ -94,13 +99,18 @@ public abstract class Framework {
     	
     	buttons.setPreferredSize(new Dimension(500, 25));
     	
-    	gameFrame.add(buttons, BorderLayout.WEST);
+    	gameAreaINGBC.add(buttons, BorderLayout.WEST);
     }
     
     public void constructHealth() {
     	JPanel healthRegion = new JPanel();
     	healthRegion.setLayout(new FlowLayout());
     	
+    	ImageIcon icon = new ImageIcon(this.getClass().getResource("images/heart.png"));
+    	JLabel iconLabel = new JLabel(icon);
     	
+    	healthRegion.add(iconLabel);
+    	
+    	gameAreaINGBC.add(healthRegion, BorderLayout.EAST);
     }
 }
