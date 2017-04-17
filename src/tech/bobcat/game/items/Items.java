@@ -2,12 +2,14 @@ package tech.bobcat.game.items;
 
 public abstract class Items {
 
-	private String itemName;
-	private boolean isUseable;
+	protected String itemName;
+	protected boolean isUseable;
+	protected int amount;
 	
-	public Items(String itemName, boolean isUseable) {
+	public Items(String itemName, boolean isUseable, int amount) {
 		this.itemName = itemName;
 		this.isUseable = isUseable;
+		this.amount = amount;
 	}
 	
 	public String getItemName() {
