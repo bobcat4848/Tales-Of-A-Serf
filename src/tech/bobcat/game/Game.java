@@ -24,7 +24,9 @@ import javax.swing.border.LineBorder;
 import tech.bobcat.game.listeners.Controller;
 import tech.bobcat.game.listeners.Inventory;
 import tech.bobcat.game.listeners.InventoryListener;
+import tech.bobcat.game.player.Player;
 import tech.bobcat.game.util.Moderator;
+import tech.bobcat.game.util.Story;
 
 import javax.swing.JScrollPane;
 import javax.swing.JScrollBar;
@@ -37,8 +39,7 @@ public class Game {
 	private JTextField gameField;
 	
 	// Game Objects
-	private Inventory inventory = new Inventory();
-	
+	private Player player = new Player(new Inventory(), 20);
 	private Moderator gameLogic;
 
 	/**
@@ -62,6 +63,8 @@ public class Game {
 	 */
 	public Game() {
 		initialize();
+		
+		gameLogic.begin();
 	}
 
 	/**
@@ -86,10 +89,10 @@ public class Game {
 		gameField = new JTextField();
 		gameField.setFont(new Font("Arial", Font.PLAIN, 20));
 		gameField.setBounds(10, 262, 974, 35);
-		gameField.addActionListener(new Controller(gameArea, gameField));
+		gameField.addActionListener(new Controller(gameArea, gameField, gameLogic));
 		gameFrame.getContentPane().add(gameField);
 		gameField.setColumns(10);
-		
+	
 		gameLogic = new Moderator(gameArea, gameField);
 		
 		JPanel buttonRegion = new JPanel();
@@ -99,7 +102,7 @@ public class Game {
 		
 		JButton inventoryButton = new JButton("Inventory");
 		inventoryButton.setFont(new Font("Tahoma", Font.BOLD, 30));
-		inventoryButton.addActionListener(new InventoryListener(inventory, gameArea));
+		inventoryButton.addActionListener(new InventoryListener(player.getInventory(), gameArea));
 		buttonRegion.add(inventoryButton);
 		
 		JButton mapButton = new JButton("Map");

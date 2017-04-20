@@ -22,8 +22,11 @@ public class Controller implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
 		gameArea.append(gameField.getText()+"\n");
+		
+		gameLogic.setMessage(gameField.getText());
+		gameLogic.feedback();
+		
 		gameField.setText("");
 	}
 }

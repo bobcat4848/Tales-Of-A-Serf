@@ -1,11 +1,22 @@
 package tech.bobcat.game.player;
 
+import tech.bobcat.game.listeners.Inventory;
+
 public class Player {
-    public int health;
-    public Location position;
+	
+    private int health;
+    private Inventory playerInventory;
    
-    public Player(int health, Location position) {
+    public Player(Inventory playerInventory, int health) {
         this.health = health;
-        this.position = position;
+        this.playerInventory = playerInventory;
+    }
+    
+    public Inventory getInventory() {
+    	return this.playerInventory;
+    }
+    
+    public int getHealth() {
+    	return this.health;
     }
 }

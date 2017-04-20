@@ -1,34 +1,42 @@
 package tech.bobcat.game.util;
 
-import javax.swing.JTextArea;
-
 public class Story {
 
 	private Moderator gameLogic;
-	private JTextArea gameArea;
 	
-	public Story(JTextArea gameArea, Moderator gameLogic) {
-		this.gameArea = gameArea;
+	private String[] options;
+	
+	public Story(Moderator gameLogic) {
+		this.gameLogic = gameLogic;
 	}
 	
-	public void start() {
-		print("Welcome to Tales of a Serf!");
-		print("");
-		print("You will begin your life as a lonely serf and make your way to the top.");
-		print("Would you like to be thy serf?");
-		print("- Yes");
-		print("- No");
+	public void storyStart() {
+		print("Welcome to Tales of a Serf!", false);
+		print(" ", false);
+		print("You will begin your life as a lonely serf and make your way to the top.", false);
+		
+		// Sample question, not actual story
+		ask("Would you like to be thy serf?", new String[]{"Yes", "No"});
 	}
 	
-	public void print(String str) {
-		gameArea.append(str+"\n");
+	public void print(String str, boolean options) {
+		gameLogic.getGameArea().append(str+"\n");
 	}
 	
 	public void ask(String question, String[] options) {
-		print(question);
+		this.options = options;
+		print(question, false);
 		for (int i = 0; i < options.length; i++) {
-			print("- " + options[i]);
+			print("- " + options[i], true);
 		}
 	}
 	
+	// Create a battle class and have that entire class handle battle scenes
+	public void battle() {
+		//Battle instancedBattle = new Battle();
+	}
+	
+	public String[] getOptions() {
+		return this.getOptions();
+	}
 }
