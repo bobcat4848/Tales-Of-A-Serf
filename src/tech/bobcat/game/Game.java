@@ -89,11 +89,13 @@ public class Game {
 		gameField = new JTextField();
 		gameField.setFont(new Font("Arial", Font.PLAIN, 20));
 		gameField.setBounds(10, 262, 974, 35);
+		
+		gameLogic = new Moderator(gameArea, gameField);
+		
 		gameField.addActionListener(new Controller(gameArea, gameField, gameLogic));
 		gameFrame.getContentPane().add(gameField);
 		gameField.setColumns(10);
 	
-		gameLogic = new Moderator(gameArea, gameField);
 		
 		JPanel buttonRegion = new JPanel();
 		buttonRegion.setBounds(10, 308, 600, 152);

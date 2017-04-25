@@ -16,10 +16,13 @@ public class Moderator {
 		this.gameField = gameField;
 	}
 	
-	public void feedback() {
-		if (!checkValidResponse(storyLine.getOptions(), lastMessage)) {
-			
+	public String feedback() {
+		while (!checkValidResponse(storyLine.getOptions(), lastMessage)) {
+			gameArea.append("Invalid Response! Enter a valid response!");
+			storyLine.ask(storyLine.getQuestion(), storyLine.getOptions());
 		}
+		
+		return lastMessage;
 	}
 	
 	public boolean checkValidResponse(String[] responses, String response) {
